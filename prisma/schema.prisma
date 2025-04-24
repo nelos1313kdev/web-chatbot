@@ -1,0 +1,55 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  subscription  Subscription?
+  prompts       Prompt[]
+  uploadedFiles UploadedFile[]
+  credits       Int       @default(3) // Free trial credits
+}
+
+model Subscription {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String    @unique @db.ObjectId
+  user          User      @relation(fields: [userId], references: [id])
+  stripeCustomerId String @unique
+  stripeSubscriptionId String? @unique
+  status        String    @default("inactive")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Prompt {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  content       String
+  response      String
+  userId        String    @db.ObjectId
+  user          User      @relation(fields: [userId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  detectability Float     // Score from 0-1 indicating how detectable the text is
+}
+
+model UploadedFile {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  fileName      String
+  fileKey       String    // S3 key or other storage reference
+  fileType      String
+  fileSize      Int
+  userId        String    @db.ObjectId
+  user          User      @relation(fields: [userId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+} 
