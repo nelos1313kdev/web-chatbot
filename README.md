@@ -3,7 +3,7 @@
 A modern web application that provides an AI-powered chatbot with undetectable text generation capabilities.
 
 ## Features
-
+   
 - AI-powered chatbot with natural language processing
 - Undetectable text generation algorithm
 - User authentication and authorization
