@@ -10,7 +10,7 @@ A modern web application that provides an AI-powered chatbot with undetectable t
 - Subscription management with Stripe integration
 - Free trial with 3 prompts
 - Modern and responsive UI
-
+## AI-powered chatbot with natural language processing
 ## Prerequisites
 
 - Node.js 18.x or later
