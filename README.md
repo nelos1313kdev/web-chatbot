@@ -32,6 +32,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="your-stripe-publishable-key"
 STRIPE_PRICE_ID="your-stripe-price-id"
 OPENAI_API_KEY="your-openai-api-key"
 ```
+## Environment Variables
 
 ## Installation
 
